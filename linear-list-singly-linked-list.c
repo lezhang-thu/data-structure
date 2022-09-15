@@ -16,7 +16,7 @@ int Length(struct ListNode *L) {
     p = L->next; /* p指向表的第0个结点 */
     while (p) {
         p = p->next;
-        cnt++; /* 当前p指向的是第cnt个结点*/
+        cnt++; /* 当前p指向的是第cnt个结点 */
     }
 
     return cnt;
