@@ -53,7 +53,7 @@ bool Insert(struct ListNode *L, int X, int i) { /* 这里默认L有头结点 */
         pre = pre->next;
         cnt++;
     }
-    if (pre == NULL || cnt != i - 1) { /* 所找结点不在L中 */
+    if (pre == NULL) { /* 所找结点不在L中 */
         printf("插入位置参数错误\n");
         return false;
     } else { /* 找到了待插结点的前一个结点pre；若i为0，pre就指向表头 */
@@ -115,7 +115,12 @@ int main(void) {
 
     for (k = 0; k < 5; k++)
         create(L, a[4 - k]);
+
+    //printf("%d\n", Length(L));
     printOut(L);
+    Insert(L, 4, 6);
+    printOut(L);
+    return 0;
     /*for (k = 0; k < 5; k++)
         Insert(L, a[k], k);*/
     /*printf("%d\n", Length(L));
