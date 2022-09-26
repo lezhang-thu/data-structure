@@ -29,14 +29,14 @@ bool push(struct Stack *s, int x) {
     }
 }
 
-bool isEmpty(struct Stack *s) { return (s->top == -1); }
+bool isEmpty(struct Stack *s) { return s->top == -1; }
 
 int pop(struct Stack *s) {
     if (isEmpty(s)) {
         printf("堆栈空");
         return ERROR; /* ERROR是int的特殊值，标志错误 */
     } else
-        return (s->data[(s->top)--]);
+        return s->data[(s->top)--];
 }
 
 int main(void) {
