@@ -8,7 +8,7 @@ struct TreeNode {
 
 void leaves(struct TreeNode *root) {
     if (root) {
-        if (!root->left && !root->right) printf("%d", root->val);
+        if (!root->left && !root->right) printf("%d ", root->val);
         leaves(root->left);
         leaves(root->right);
     }
