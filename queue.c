@@ -12,6 +12,7 @@ struct Queue {
 struct Queue *createQueue(int MaxSize) {
     struct Queue *Q = (struct Queue *)malloc(sizeof(struct Queue));
     Q->data = (int *)malloc(MaxSize * sizeof(int));
+    // MOD World. (explains WHY zero?)
     Q->front = Q->rear = 0;
     Q->MaxSize = MaxSize;
     return Q;
@@ -21,7 +22,7 @@ bool isFull(struct Queue *Q) { return (Q->rear + 1) % Q->MaxSize == Q->front; }
 
 bool enQueue(struct Queue *Q, int x) {
     if (isFull(Q)) {
-        printf("队列满");
+        printf("队列满 ");
         return false;
     } else {
         Q->rear = (Q->rear + 1) % Q->MaxSize;
@@ -34,7 +35,7 @@ bool isEmpty(struct Queue *Q) { return Q->front == Q->rear; }
 
 int deQueue(struct Queue *Q) {
     if (isEmpty(Q)) {
-        printf("队列空");
+        printf("队列空 ");
         return ERROR;
     } else {
         Q->front = (Q->front + 1) % Q->MaxSize;
@@ -43,7 +44,7 @@ int deQueue(struct Queue *Q) {
 }
 
 int main(void) {
-    struct Queue *q = createQueue(6);
+    struct Queue *q = createQueue(7);
     enQueue(q, 1);
     enQueue(q, 2);
     enQueue(q, 3);
