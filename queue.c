@@ -12,7 +12,8 @@ struct Queue {
 struct Queue *createQueue(int MaxSize) {
     struct Queue *Q = (struct Queue *)malloc(sizeof(struct Queue));
     Q->data = (int *)malloc(MaxSize * sizeof(int));
-    // MOD World. (explains WHY zero?)
+    // MOD World. (explain WHY zero?)
+    // valid range (front, rear]
     Q->front = Q->rear = 0;
     Q->MaxSize = MaxSize;
     return Q;
