@@ -48,3 +48,77 @@ int deepestLeavesSum(struct TreeNode *root) {
     free(queue);
     return sum;
 }
+
+struct TreeNode *find(struct TreeNode *root, int x) {
+    while (root) {
+        if (x > root->val)
+            root = root->right;
+        else if (x < root->val)
+            root = root->left;
+        else
+            return root;
+    }
+    return NULL;
+}
+
+struct TreeNode *findMin(struct TreeNode *root) {
+    if (root)
+        while (root->left) root = root->left;
+    return root;
+}
+
+struct TreeNode *insert(struct TreeNode *root, int x) {
+    if (!root) {
+        root = (struct TreeNode *)malloc(sizeof(struct TreeNode));
+        root->val = x;
+        root->left = root->right = NULL;
+    } else {
+        if (x < root->val)
+            root->left = insert(root->left, x);
+        else if (x > root->val)
+            root->right = insert(root->right, x);
+    }
+    return root;
+}
+
+struct TreeNode *delete (struct TreeNode *root, int x) {
+    struct TreeNode *t;
+    if (!root)
+        printf("要删除的元素未找到\n");
+    else {
+        if (x < root->val)
+            root->left = delete (root->left, x);
+        else if (x > root->val)
+            root->right = delete (root->right, x);
+        else {
+            if (root->left && root->right) {
+                t = findMin(root->right);
+                root->val = t->val;
+                root->right = delete (root->right, root->val);
+            } else {
+                t = root;
+                if (!root->left)
+                    root = root->right;
+                else
+                    root = root->left;
+                free(t);
+            }
+        }
+    }
+    return root;
+}
+
+int main(void) {
+    struct TreeNode *root = NULL;
+    int a[] = {30, 15, 41, 33, 50, 35};
+    int k;
+    for (k = 0; k < 6; k++) root = insert(root, a[k]);
+    printf("%d\n", deepestLeavesSum(root));
+    insert(root, 34);
+    printf("%d\n", deepestLeavesSum(root));
+    delete (root, 33);
+    printf("%d\n", deepestLeavesSum(root));
+    delete (root, 34);
+    printf("%d\n", deepestLeavesSum(root));
+    delete (root, 23);
+}

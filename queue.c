@@ -57,7 +57,7 @@ int main(void) {
     printf("%d\n", deQueue(q));
     enQueue(q, 7);
     enQueue(q, 8);
-    printf("%d\n", enQueue(q, 9));
+    enQueue(q, 9);
     printf("Jobs:\n");
     while (!isEmpty(q)) printf("%d ", deQueue(q));
     printf("\n");
