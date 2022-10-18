@@ -1,3 +1,4 @@
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -5,6 +6,14 @@ struct TreeNode {
     int val;
     struct TreeNode *left, *right;
 };
+
+void inorder(struct TreeNode *root) {
+    if (root) {
+        inorder(root->left);
+        printf("%d ", root->val);
+        inorder(root->right);
+    }
+}
 
 void leaves(struct TreeNode *root) {
     if (root) {
@@ -47,6 +56,11 @@ int deepestLeavesSum(struct TreeNode *root) {
     }
     free(queue);
     return sum;
+}
+
+void zigzag(struct TreeNode *root) {
+    /* Your Code - START */
+    /* Your Code - END */
 }
 
 struct TreeNode *find(struct TreeNode *root, int x) {
@@ -109,7 +123,15 @@ struct TreeNode *delete (struct TreeNode *root, int x) {
 }
 
 int main(void) {
+    /* 构造树 - 开始 */
     struct TreeNode *root = NULL;
+    int a[] = {7, 3, 15, 9, 20};
+    int k;
+    for (k = 0; k < 5; k++) root = insert(root, a[k]);
+    /* 构造树 - 结束 */
+    zigzag(root);
+    return 0;
+    /*struct TreeNode *root = NULL;
     int a[] = {30, 15, 41, 33, 50, 35};
     int k;
     for (k = 0; k < 6; k++) root = insert(root, a[k]);
@@ -120,5 +142,5 @@ int main(void) {
     printf("%d\n", deepestLeavesSum(root));
     delete (root, 34);
     printf("%d\n", deepestLeavesSum(root));
-    delete (root, 23);
+    delete (root, 23);*/
 }
