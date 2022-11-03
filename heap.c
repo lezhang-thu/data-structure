@@ -27,7 +27,7 @@ bool insert(struct HNode *h, int x) {
         return false;
     }
     i = ++h->size;
-    for (; i >= 1 && h->data[i / 2] < x; i /= 2) h->data[i] = h->data[i / 2];
+    for (; i >= 2 && h->data[i / 2] < x; i /= 2) h->data[i] = h->data[i / 2];
     h->data[i] = x;
     return true;
 }
