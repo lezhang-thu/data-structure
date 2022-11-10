@@ -8,7 +8,7 @@ struct HNode {
     int *data;
     int size, capacity;
 };
-
+void printHeap(struct HNode *);
 struct HNode *createHeap(int maxsize) {
     struct HNode *h = (struct HNode *)malloc(sizeof(struct HNode));
     h->data = (int *)malloc(sizeof(int) * maxsize);
@@ -78,7 +78,10 @@ void buildHeap(
     /* 这里假设所有h->size个元素已经存在h->data[]中 */
     int i;
     /* 从最后一个结点的父节点开始，到根结点1 */
-    for (i = h->size / 2; i > 0; i--) percDown(h, i);
+    for (i = h->size / 2; i > 0; i--) {
+        percDown(h, i);
+        printHeap(h);
+    }
 }
 
 void printHeap(struct HNode *h) {
@@ -94,7 +97,8 @@ int main(void) {
     for (k = 0; k < 12; k++) h->data[k + 1] = a[k];
     h->size = 12;
     buildHeap(h);
-    printHeap(h);
+    //printHeap(h);
+    printf("\n");
     while (!isEmpty(h)) printf("%d ", deleteMax(h));
     printf("\n");
     return 0;

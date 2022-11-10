@@ -1,5 +1,6 @@
 #include <stdbool.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 
 void DFS(int adj_matrix[][8], int v, bool visited[]) {
@@ -7,9 +8,28 @@ void DFS(int adj_matrix[][8], int v, bool visited[]) {
     printf("%c ", (char)(v + 'A'));
     int k;
     for (k = 0; k < 8; k++) {
-        if (adj_matrix[v][k] != 0 && !visited[k]) {
+        if (adj_matrix[v][k] && !visited[k]) {
             DFS(adj_matrix, k, visited);
         }
+    }
+}
+
+void BFS(int adj_matrix[][8], int s, bool visited[]) {
+    int* queue = (int*)malloc(sizeof(int) * (8 + 1));
+    int front = 0, rear = 0;
+    visited[s] = true;
+    printf("%c ", (char)(s + 'A'));
+    queue[++rear] = s;
+
+    while (front < rear) {
+        int v, w;
+        v = queue[++front];
+        for (w = 0; w < 8; w++)
+            if (adj_matrix[v][w] && !visited[w]) {
+                visited[w] = true;
+                printf("%c ", (char)(w + 'A'));
+                queue[++rear] = w;
+            }
     }
 }
 
@@ -41,6 +61,10 @@ int main(void) {
     memset(visited, 0, sizeof(bool) * 8);
 
     DFS(adj_matrix, 'E' - 'A', visited);
+    printf("\n");
+
+    memset(visited, 0, sizeof(bool) * 8);
+    BFS(adj_matrix, 'E' - 'A', visited);
     printf("\n");
     return 0;
 }

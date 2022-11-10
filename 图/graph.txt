@@ -1,0 +1,18 @@
+17
+Z B 8
+B D 5
+Z W 5
+B W 5
+B L 4
+D L 4
+W X 8
+W H 4
+L H 4
+L F 2
+X H 7
+F H 3
+X Y 5
+H Y 5
+H C 6
+F C 7
+Y C 6
