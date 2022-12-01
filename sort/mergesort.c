@@ -14,7 +14,7 @@ void merge(int A[], int B[], int left, int mid, int right) {
     }
     while (i <= mid) B[k++] = A[i++];
     while (j <= right) B[k++] = A[j++];
-    for (i = left, k = left; i <= right; i++, k++) A[i] = B[k];
+    for (i = left; i <= right; i++) A[i] = B[i];
 }
 
 void x_mergesort(int A[], int B[], int left, int right) {
