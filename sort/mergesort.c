@@ -27,7 +27,7 @@ void x_mergesort(int A[], int B[], int left, int right) {
 }
 
 int main() {
-    int A[10] = {2, 10, 7, 3, 6, 8, 1, 9, 4, 5};
+    int A[] = {2, 10, 7, 3, 6, 8, 1, 9, 4, 5};
     int *B = (int *)malloc(sizeof(int) * 10);
     int k;
     printf("before sort:\n");
