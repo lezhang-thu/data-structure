@@ -39,8 +39,7 @@ int FindKth(struct ListNode *L, int K) {
 struct ListNode *Find(struct ListNode *L, int X) {
     struct ListNode *p = L->next;
     /* p指向L的第0个结点 */
-    while (p && p->val != X)
-        p = p->next;
+    while (p && p->val != X) p = p->next;
     return p;
 }
 
@@ -105,6 +104,25 @@ void create(struct ListNode *L, int X) {
     L->next = t;
 }
 
+void insert_9_after_10(struct ListNode *h) {
+    h = h->next; // 5
+    h = h->next; // 10
+    struct ListNode *p = h;
+    struct ListNode *t = (struct ListNode *)malloc(sizeof(struct ListNode));
+    t->val = 9;
+    t->next = p->next;
+    p->next = t;
+}
+
+void delete_9_after_10(struct ListNode *h) {
+    h = h->next; // 5
+    h = h->next; // 10
+    struct ListNode *p = h;
+    struct ListNode *t = p->next;
+    p->next = t->next;
+    free(t);
+}
+
 int main(void) {
     struct ListNode *L = (struct ListNode *)malloc(sizeof(struct ListNode));
     L->next = NULL;
@@ -113,11 +131,15 @@ int main(void) {
 
     int k;
 
-    for (k = 0; k < 5; k++)
-        create(L, a[4 - k]);
-
-    //printf("%d\n", Length(L));
+    for (k = 0; k < 5; k++) create(L, a[4 - k]);
     printOut(L);
+    insert_9_after_10(L);
+    printOut(L);
+    delete_9_after_10(L);
+    printOut(L);
+    return 0;
+
+    // printf("%d\n", Length(L));
     Insert(L, 4, 6);
     printOut(L);
     return 0;

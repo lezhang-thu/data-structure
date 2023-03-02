@@ -26,11 +26,11 @@ struct PolyNode *addPoly(struct PolyNode *poly1, struct PolyNode *poly2) {
                 poly1->coefficient += poly2->coefficient;
                 cur->next = poly1;
                 cur = cur->next;
-            } else {
-                x = poly1;
             }
+            x = poly1;
             poly1 = poly1->next;
             if (!sum) free(x);
+
             x = poly2;
             poly2 = poly2->next;
             free(x);
