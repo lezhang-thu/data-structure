@@ -64,6 +64,44 @@ void zigzag(struct TreeNode *root) {
 }
 
 struct TreeNode *find(struct TreeNode *root, int x) {
+    struct TreeNode *p = root;
+    while (p) {
+        if (x < p->val)
+            p = p->left;
+        else if (x > p->val)
+            p = p->right;
+        else
+            return p;
+    }
+    return NULL;
+}
+
+struct TreeNode *findMin(struct TreeNode *root) {
+    if (root == NULL) return NULL;
+    struct TreeNode *p = root;
+    while (p->left) p = p->left;
+    return p;
+}
+
+struct TreeNode *insert(struct TreeNode *root, int x) {
+    if (root == NULL) {
+        struct TreeNode *p = (struct TreeNode *)malloc(sizeof(struct TreeNode));
+        p->val = x;
+        p->left = p->right = NULL;
+        return p;
+    }
+    // root为非空树
+    if (x < root->val)
+        root->left = insert(root->left, x);
+    else if (x > root->val)
+        root->right = insert(root->right, x);
+    else {
+        printf("节点已存在！\n");
+    }
+    return root;
+}
+
+struct TreeNode *find(struct TreeNode *root, int x) {
     while (root) {
         if (x > root->val)
             root = root->right;

@@ -3,7 +3,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-void DFS(int adj_matrix[][8], int v, bool visited[]) {
+void DFS(int adj_matrix[][8], int v, bool visited[]);
+/*void DFS(int adj_matrix[][8], int v, bool visited[]) {
     visited[v] = true;
     printf("%c ", (char)(v + 'A'));
     int k;
@@ -12,7 +13,7 @@ void DFS(int adj_matrix[][8], int v, bool visited[]) {
             DFS(adj_matrix, k, visited);
         }
     }
-}
+}*/
 
 void BFS(int adj_matrix[][8], int s, bool visited[]) {
     int* queue = (int*)malloc(sizeof(int) * (8 + 1));
@@ -63,8 +64,19 @@ int main(void) {
     DFS(adj_matrix, 'E' - 'A', visited);
     printf("\n");
 
-    memset(visited, 0, sizeof(bool) * 8);
+    /*memset(visited, 0, sizeof(bool) * 8);
     BFS(adj_matrix, 'E' - 'A', visited);
     printf("\n");
-    return 0;
+    return 0;*/
+}
+
+void DFS(int adj_matrix[][8], int v, bool visited[]) {
+    visited[v] = true;
+    printf("%c ", (char)(v + 'A'));
+    int w;
+    for (w=0; w<8; w++) {
+       if (adj_matrix[v][w] == 1 && !visited[w])
+            DFS(adj_matrix, w, visited);
+
+    }
 }

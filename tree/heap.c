@@ -8,6 +8,56 @@ struct HNode {
     int *data;
     int size, capacity;
 };
+
+int deQueue(struct HNode *h) {
+    int x = h->data[h->size];
+    h->data[h->size] = h->data[1];
+    h->data[1] = x;
+
+    h->size--;
+   
+    int k = 1;
+    for(; 2 * k <= h->size; ) {
+        int child = 2 * k; 
+        if (child + 1 <= h->size && h->data[child + 1] > h->data[child])
+            child += 1;
+        if (h->data[child] > x) {
+            h->data[k] = h->data[child];
+            k = child;
+        }
+        else break;
+    }
+    h->data[k] = x;
+    return h->data[h->size + 1];
+}
+
+struct HNode *createHeap(int maxSize) {
+    struct HNode *h = (struct HNode*)malloc(sizeof(struct HNode));
+    h->data = (int*)malloc(sizeof(int) * (maxSize + 1));
+    h->capacity = maxSize;
+    h->size = 0;
+    return h;
+}
+
+
+// MaxHeap
+void enQueue(struct HNode *q, int x) {
+    // q->data[++q->size] = x;
+    q->size++;
+    int k = q->size;
+    for (; k >= 2 && q->data[k / 2] < x; k = k / 2) {
+        q->data[k] = q->data[k / 2];
+    }
+    q->data[k] = x;
+}
+
+
+
+
+
+
+
+
 void printHeap(struct HNode *);
 struct HNode *createHeap(int maxsize) {
     struct HNode *h = (struct HNode *)malloc(sizeof(struct HNode));
@@ -97,7 +147,7 @@ int main(void) {
     for (k = 0; k < 12; k++) h->data[k + 1] = a[k];
     h->size = 12;
     buildHeap(h);
-    //printHeap(h);
+    // printHeap(h);
     printf("\n");
     while (!isEmpty(h)) printf("%d ", deleteMax(h));
     printf("\n");
