@@ -4,6 +4,7 @@
 #include <string.h>
 
 void DFS(int adj_matrix[][8], int v, bool visited[]);
+void BFS(int adj_matrix[][8], int s, bool visited[]);
 /*void DFS(int adj_matrix[][8], int v, bool visited[]) {
     visited[v] = true;
     printf("%c ", (char)(v + 'A'));
@@ -15,7 +16,7 @@ void DFS(int adj_matrix[][8], int v, bool visited[]);
     }
 }*/
 
-void BFS(int adj_matrix[][8], int s, bool visited[]) {
+/*void BFS(int adj_matrix[][8], int s, bool visited[]) {
     int* queue = (int*)malloc(sizeof(int) * (8 + 1));
     int front = 0, rear = 0;
     visited[s] = true;
@@ -32,7 +33,7 @@ void BFS(int adj_matrix[][8], int s, bool visited[]) {
                 queue[++rear] = w;
             }
     }
-}
+}*/
 
 int main(void) {
     int adj_matrix[8][8];
@@ -61,7 +62,8 @@ int main(void) {
     bool visited[8];
     memset(visited, 0, sizeof(bool) * 8);
 
-    DFS(adj_matrix, 'E' - 'A', visited);
+    //DFS(adj_matrix, 'E' - 'A', visited);
+    BFS(adj_matrix, 'E' - 'A', visited);
     printf("\n");
 
     /*memset(visited, 0, sizeof(bool) * 8);
@@ -80,3 +82,34 @@ void DFS(int adj_matrix[][8], int v, bool visited[]) {
 
     }
 }
+
+void BFS(int adj_matrix[][8], int s, bool visited[]) {  
+    int *queue = (int*)malloc(sizeof(int) * 8);
+    int front, rear;
+    front = rear = -1;
+    queue[++rear] = s;
+    visited[s] = true;
+    int d = 0;
+
+    while (front != rear) {
+        int i; 
+        int size = rear - front;
+        printf("distance: %d\n", d);
+        for (i=0; i<size; i++) {
+            int u = queue[++front];
+            printf("%c ", (char)(u + 'A'));
+
+            int k;
+            for (k=0; k<8; k++)
+                if (adj_matrix[u][k] == 1 && !visited[k]) {
+                    queue[++rear] = k;
+                    visited[k] = true;
+                }
+        }
+        d++;
+        printf("\n");
+    }
+    printf("\n");
+
+}
+
